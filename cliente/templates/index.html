@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <!-- Adicione os links do Bootstrap aqui -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <form action="{% url 'salvar' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" class="form-control" id="nome" placeholder="Digite o nome">
+            </div>
+            <div class="form-group">
+                <label for="cidade">Cidade:</label>
+                <input type="text" name="cidade" class="form-control" id="cidade" placeholder="Digite a cidade">
+            </div>
+            <div class="form-group">
+                <label for="tipo">Escolha uma opção:</label>
+                <select name="tipo" id="tipo" class="form-control">
+                    <option value="consulta">Consulta</option>
+                    <option value="retorno">Retorno</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+
+        <!-- Tabela para exibir resultados -->
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pessoa in pessoas %}
+                    <tr>
+                        <td>{{ pessoa.nome }}</td>
+                        <td>{{ pessoa.cidade }}</td>
+                        <td>{{ pessoa.tipo }}</td>
+                        <td>
+                            <a href="{% url 'editar' pessoa.id %}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="{% url 'delete' pessoa.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza de que deseja excluir?')">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Adicione os scripts do Bootstrap aqui -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+

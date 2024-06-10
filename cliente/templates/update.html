@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <!-- Adicione os links do Bootstrap aqui -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <form action="{% url 'update' pessoa.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" class="form-control" value="{{pessoa.nome}}">
+            </div>
+            <div class="form-group">
+                <label for="cidade">Cidade:</label>
+                <input type="text" name="cidade" class="form-control" value="{{pessoa.cidade}}">
+            </div>
+            <div class="form-group">
+                <label for="tipo">Escolha uma opção:</label>
+                <select name="tipo" id="tipo" class="form-control">
+                    <option value="consulta">Consulta</option>
+                    <option value="retorno">Retorno</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/cliente/" class="btn btn-secondary">Cancelar</a>
+        </form>
+
+    </div>
+
+    <!-- Adicione os scripts do Bootstrap aqui -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+</body>
+</html>
